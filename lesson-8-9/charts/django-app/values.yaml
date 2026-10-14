@@ -1,6 +1,6 @@
 image:
   repository: 469935552561.dkr.ecr.us-west-2.amazonaws.com/lesson-8-9-django
-  tag: latest
+  tag: v1.0.4
   pullPolicy: IfNotPresent
 
 service:
