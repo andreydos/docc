@@ -46,6 +46,7 @@ spec:
     stage('Prepare') {
       steps {
         container('git') {
+          sh 'git config --global --add safe.directory "$WORKSPACE"'
           script {
             def message = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
             env.SKIP_BUILD = message.contains('[skip ci]') ? 'true' : 'false'

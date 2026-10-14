@@ -2,3 +2,12 @@ server:
   service:
     type: LoadBalancer
     servicePortHttps: 443
+
+dex:
+  enabled: false
+
+notifications:
+  enabled: false
+
+applicationSet:
+  enabled: false
