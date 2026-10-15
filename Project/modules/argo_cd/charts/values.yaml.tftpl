@@ -1,0 +1,25 @@
+argoNamespace: ${argo_namespace}
+
+applications:
+  - name: django-app
+    project: default
+    source:
+      repoURL: ${git_repo_url}
+      path: ${chart_path}
+      targetRevision: ${git_revision}
+      helm:
+        valueFiles:
+          - values.yaml
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: default
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+
+repositories:
+  - name: docc
+    url: ${git_repo_url}
+    username: ${github_username}
+    password: "${github_token}"

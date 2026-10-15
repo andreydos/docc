@@ -1,0 +1,22 @@
+adminUser: admin
+adminPassword: "${admin_password}"
+
+service:
+  type: ClusterIP
+  port: 80
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://prometheus-server.monitoring.svc.cluster.local:80
+        isDefault: true
+
+dashboards:
+  default:
+    node-exporter:
+      gnetId: 1860
+      datasource: Prometheus

@@ -1,0 +1,26 @@
+image:
+  repository: 469935552561.dkr.ecr.us-west-2.amazonaws.com/final-django
+  tag: v1.0.0
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 8000
+
+autoscaling:
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+config:
+  POSTGRES_DB: myapp
+  POSTGRES_NAME: myapp
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: overridden-by-secret
+  POSTGRES_HOST: overridden-by-secret
+  POSTGRES_PORT: "5432"

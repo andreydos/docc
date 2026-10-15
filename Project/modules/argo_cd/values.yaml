@@ -1,0 +1,15 @@
+server:
+  service:
+    type: ClusterIP
+    servicePortHttps: 443
+
+fullnameOverride: argocd
+
+dex:
+  enabled: false
+
+notifications:
+  enabled: false
+
+applicationSet:
+  enabled: false

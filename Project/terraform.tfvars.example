@@ -1,0 +1,5 @@
+github_username = "andreydos"
+github_token    = "github_pat_replace_me"
+git_repo_url    = "https://github.com/andreydos/docc.git"
+git_revision    = "final-project"
+db_password     = "replace-with-a-real-password"
