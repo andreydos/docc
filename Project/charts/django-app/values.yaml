@@ -1,6 +1,6 @@
 image:
   repository: 469935552561.dkr.ecr.us-west-2.amazonaws.com/final-django
-  tag: v1.0.1
+  tag: v1.0.3
   pullPolicy: IfNotPresent
 
 service:
