@@ -35,10 +35,10 @@ module "eks" {
   cluster_version    = "1.35"
   public_subnet_ids  = module.vpc.public_subnets
   private_subnet_ids = module.vpc.private_subnets
-  desired_size       = 2
-  min_size           = 2
+  desired_size       = 3
+  min_size           = 3
   max_size           = 3
-  instance_types     = ["t3.medium"]
+  instance_types     = ["t3.small"]
 }
 
 module "rds" {
@@ -74,13 +74,9 @@ module "rds" {
   }
 }
 
-data "aws_eks_cluster" "this" {
-  name = module.eks.cluster_name
-}
-
 provider "kubernetes" {
-  host                   = data.aws_eks_cluster.this.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.this.certificate_authority[0].data)
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
     command     = "aws"
@@ -90,8 +86,8 @@ provider "kubernetes" {
 
 provider "helm" {
   kubernetes {
-    host                   = data.aws_eks_cluster.this.endpoint
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.this.certificate_authority[0].data)
+    host                   = module.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
       command     = "aws"

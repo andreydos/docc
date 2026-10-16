@@ -6,7 +6,7 @@ Terraform creates:
 
 - an S3 bucket and a DynamoDB table for the Terraform state
 - a VPC `10.3.0.0/16` with public and private subnets
-- an EKS cluster `final-eks` (2 × t3.medium, up to 3)
+- an EKS cluster `final-eks` (3 × t3.small)
 - an ECR repository `final-django`
 - PostgreSQL 17 on RDS `db.t3.micro` in the private subnets
 - Jenkins in namespace `jenkins`
@@ -51,6 +51,8 @@ cd Project
 terraform init
 terraform apply
 ```
+
+The Kubernetes and Helm providers take the API address from the EKS module. On the first apply that address does not exist yet, so Terraform creates the cluster first and configures Jenkins, Argo CD, and monitoring in the same run.
 
 Connect kubectl:
 
